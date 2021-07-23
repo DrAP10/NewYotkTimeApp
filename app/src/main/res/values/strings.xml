@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">NewYorkTimesApp</string>
+    <string-array name="news_type_options">
+        <item>Most Emailed</item>
+        <item>Most Shared</item>
+        <item>Most Viewed</item>
+    </string-array>
+    <string-array name="news_date_options">
+        <item>1 day</item>
+        <item>7 days</item>
+        <item>30 days</item>
+    </string-array>
+    <string name="news_share_option_one">Facebook</string>
+    <string name="news_share_option_two">Twitter</string>
+    <string name="global_search">Search</string>
+    <string name="global_error">Error</string>
+    <string name="select_one_option_msg_error">Select at least one share option</string>
+    <string name="global_ok">OK</string>
+    <string name="web_not_loaded_error_msg">The web page could not be loaded, please try again later</string>
+    <string name="url_not_valid_error_msg">URL not valid</string>
+</resources>
