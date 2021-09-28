@@ -18,7 +18,7 @@ class RemoteModule {
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
-            .baseUrl("https://api.nytimes.com/svc/mostpopular/v2/")
+            .baseUrl("https://api.nytimes.com/svc/")
             .client(okHttpClient)
             .build()
     }

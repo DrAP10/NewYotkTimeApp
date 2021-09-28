@@ -1,7 +1,7 @@
 package com.example.ui.di
 
-import com.example.ui.fragments.NewsDetailFragment
-import com.example.ui.fragments.NewsFilterFragment
+import com.example.ui.fragments.NewsFavouritesFragment
+import com.example.ui.fragments.NewsMainFragment
 import com.example.ui.fragments.NewsListFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -10,11 +10,11 @@ import dagger.android.ContributesAndroidInjector
 abstract class NewsFragmentBuilder {
 
     @ContributesAndroidInjector
-    internal abstract fun bindNewsFilterFragment(): NewsFilterFragment
+    internal abstract fun bindNewsFilterFragment(): NewsMainFragment
 
     @ContributesAndroidInjector
     internal abstract fun bindNewsListFragment(): NewsListFragment
 
     @ContributesAndroidInjector
-    internal abstract fun bindNewsDetailFragment(): NewsDetailFragment
+    internal abstract fun bindNewsDetailFragment(): NewsFavouritesFragment
 }

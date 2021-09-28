@@ -4,16 +4,16 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.R
-import com.example.ui.fragments.NewsDetailFragment
+import com.example.ui.fragments.NewsFavouritesFragment
 import com.example.ui.fragments.NewsListFragment
-import com.example.ui.fragments.NewsFilterFragment
+import com.example.ui.fragments.NewsMainFragment
 
 
 class NewsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
-        inflateFragment(NewsFilterFragment.newInstance(), false)
+        inflateFragment(NewsMainFragment.newInstance(), false)
     }
 
     fun showNewsList(
@@ -33,7 +33,6 @@ class NewsActivity : AppCompatActivity() {
     }
 
     fun showDetail(url: String?, title: String?) {
-        inflateFragment(NewsDetailFragment.newInstance(url, title), true)
     }
 
     private fun inflateFragment(fragment: Fragment, addToBackStack: Boolean) {
