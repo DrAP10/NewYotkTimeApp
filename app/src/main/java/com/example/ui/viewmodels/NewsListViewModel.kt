@@ -7,12 +7,15 @@ import com.example.model.news.bo.NewBo
 import com.example.model.news.bo.NewsDateFilter
 import com.example.model.news.bo.NewsTypeFilter
 import com.example.repository.news.NewsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class NewsListViewModel @Inject constructor(
     private val newsRepository: NewsRepository
-): ViewModel() {
+) : ViewModel() {
 
     val newsLiveData: MutableLiveData<List<NewBo>> = MutableLiveData()
 
@@ -21,9 +24,41 @@ class NewsListViewModel @Inject constructor(
         dateFilter: NewsDateFilter,
         isFacebookChecked: Boolean,
         isTwitterChecked: Boolean,
-    )  = viewModelScope.launch {
-        val shareOptions = getShareOptions(typeFilter, isFacebookChecked, isTwitterChecked)
-        newsLiveData.postValue(newsRepository.getNews(typeFilter.getTypeSearchString(), dateFilter.getDateSearchInt(), shareOptions))
+    ) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+
+            val shareOptions = getShareOptions(typeFilter, isFacebookChecked, isTwitterChecked)
+
+            newsLiveData.postValue(
+                newsRepository.getNews(
+                    typeFilter.getTypeSearchString(),
+                    dateFilter.getDateSearchInt(),
+                    shareOptions
+                )
+            )
+        }
+    }
+
+    fun getFavouritesNews(
+    ) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+
+            newsLiveData.postValue(
+                newsRepository.getFavouriteNews()
+            )
+        }
+    }
+
+    fun addFavouriteNew(new: NewBo) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            newsRepository.addFavouriteNew(new)
+        }
+    }
+
+    fun removeFavouriteNew(new: NewBo) = viewModelScope.launch {
+        withContext(Dispatchers.IO) {
+            newsRepository.removeFavouriteNew(new)
+        }
     }
 
     private fun getShareOptions(

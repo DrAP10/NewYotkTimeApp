@@ -2,6 +2,8 @@ package com.example.di
 
 import com.example.NewYorkTimesApp
 import com.example.domain.di.NewsUseCaseModule
+import com.example.local.di.LocalModule
+import com.example.local.news.di.NewsLocalModule
 import com.example.remote.news.di.NewsRemoteModule
 import com.example.remote.di.RemoteModule
 import com.example.repository.news.di.NewsRepositoryModule
@@ -17,7 +19,9 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         AppModule::class,
         RemoteModule::class,
+        LocalModule::class,
         NewsRemoteModule::class,
+        NewsLocalModule::class,
         NewsRepositoryModule::class,
         NewsUseCaseModule::class,
         NewsFragmentBuilder::class,

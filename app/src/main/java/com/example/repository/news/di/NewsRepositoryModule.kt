@@ -1,5 +1,6 @@
 package com.example.repository.news.di
 
+import com.example.datasource.news.NewsLocalDataSource
 import com.example.datasource.news.NewsRemoteDataSource
 import com.example.repository.news.NewsRepository
 import com.example.repository.news.NewsRepositoryImpl
@@ -11,7 +12,7 @@ import dagger.Provides
 class NewsRepositoryModule {
 
     @Provides
-    fun newsRepositoryProvider(remote: NewsRemoteDataSource) =
-        NewsRepositoryImpl(remote) as NewsRepository
+    fun newsRepositoryProvider(remote: NewsRemoteDataSource, local: NewsLocalDataSource) =
+        NewsRepositoryImpl(remote, local) as NewsRepository
 
 }

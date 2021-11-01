@@ -1,7 +1,13 @@
 package com.example.local.di
 
 import android.content.Context
+import com.example.datasource.news.NewsLocalDataSource
+import com.example.datasource.news.NewsRemoteDataSource
 import com.example.local.AppRoomDatabase
+import com.example.local.news.NewsDao
+import com.example.local.news.NewsLocalDataSourceImpl
+import com.example.remote.news.NewsRemoteDataSourceImpl
+import com.example.remote.news.NewsWS
 import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides

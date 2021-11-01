@@ -53,6 +53,7 @@ class NewsListFragment : BaseFragment() {
     private fun configureObservers() {
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer { result ->
             mNewsAdapter.updateData(result)
+            println("ob list")
         })
     }
 
@@ -71,6 +72,14 @@ class NewsListFragment : BaseFragment() {
         return object : NewsListListener {
             override fun onNewsSelected(news: NewBo) {
                 (activity as? NewsActivity)?.showDetail(news.url, news.title)
+            }
+
+            override fun onFavClicked(news: NewBo) {
+                if (news.isFavourite) {
+                    viewModel.removeFavouriteNew(news)
+                } else {
+                    viewModel.addFavouriteNew(news)
+                }
             }
         }
     }

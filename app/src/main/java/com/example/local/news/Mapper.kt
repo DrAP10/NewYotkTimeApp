@@ -11,7 +11,8 @@ fun NewDbo.toBo() = NewBo(
     section,
     publishedDate,
     image,
-    url
+    url,
+    isFavourite,
 )
 
 fun NewBo.toDbo() = NewDbo(
@@ -21,5 +22,6 @@ fun NewBo.toDbo() = NewDbo(
     section,
     publishedDate,
     image,
-    url
+    url,
+    isFavourite
 )

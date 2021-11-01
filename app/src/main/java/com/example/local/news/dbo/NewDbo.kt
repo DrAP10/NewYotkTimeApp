@@ -13,4 +13,5 @@ data class NewDbo(
     val publishedDate: Date?,
     val image: String?,
     val url: String?,
+    val isFavourite: Boolean = false,
 )

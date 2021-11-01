@@ -3,6 +3,7 @@ package com.example.ui.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -16,11 +17,6 @@ class NewsAdapter(private val listener: NewsListListener) :
     RecyclerView.Adapter<NewsAdapter.NewViewHolder>(){
 
     private val items: MutableList<NewBo> = mutableListOf()
-
-    fun clearData() {
-        items.clear()
-        notifyDataSetChanged()
-    }
 
     fun updateData(newData: List<NewBo>) {
         val diffCallback = NewsListDiffCallback(items, newData)
@@ -40,15 +36,15 @@ class NewsAdapter(private val listener: NewsListListener) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewViewHolder {
         return NewViewHolder(
-            NewsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            NewsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            listener
         )
     }
 
-
-
-    class NewViewHolder(private val binding: NewsItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    class NewViewHolder(private val binding: NewsItemBinding, private val listener: NewsListListener) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: NewBo) {
+            setupFav(item)
             binding.title.text = item.title
             binding.section.text = item.section
             binding.author.text = item.author
@@ -57,9 +53,18 @@ class NewsAdapter(private val listener: NewsListListener) :
                 .load(item.image)
                 .centerCrop()
                 .into(binding.image)
-            binding.let {
-
+            binding.favIcon.setOnClickListener {
+                listener.onFavClicked(item)
+                item.isFavourite = !item.isFavourite
+                setupFav(item)
             }
+        }
+
+        private fun setupFav(item: NewBo) {
+            binding.favIcon.setImageDrawable(ContextCompat.getDrawable(
+                binding.root.context,
+                if (item.isFavourite) R.drawable.ic_favorite_on else R.drawable.ic_favorite_off
+            ))
         }
     }
 
@@ -81,4 +86,5 @@ class NewsAdapter(private val listener: NewsListListener) :
 
 interface NewsListListener {
     fun onNewsSelected(news: NewBo)
+    fun onFavClicked(news: NewBo)
 }
